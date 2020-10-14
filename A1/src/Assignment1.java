@@ -1,10 +1,16 @@
 public class Assignment1 {
 
 	public static void main(String [] args){
-		//int[][] map = {{0,100,0,45},{200,100,100,87},{100,100,0,9},{1000,0,300,10}};
+		int[][] map = {{200,102,105,45},
+				       {103,102,105,87},
+					   {102,102,108,9},
+				  	   {1000,0,300,10}};
+
+		int[] cell = {1,1};
 		//int[] out = findPeak(map);
 		//System.out.println(out[0]);
 		//System.out.println(out[1]);
+		//System.out.println(isSink(map,cell));
 	}
 	
 	public static int[] findPeak(int[][] map){
@@ -26,18 +32,87 @@ public class Assignment1 {
 	}
 	
 	public static boolean isSink(int[][] map, int[] cell) {
-		if(cell[0] + 1 < map.length){
-			if(map[cell[0]][cell[1]] < map[cell[0]+1][cell[1]]){
-				return true;
-			} else if(){
 
+		try {
+			if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]-1] &&
+					map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+					map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]+1] &&
+					map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1] &&
+					map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1] &&
+					map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]-1] &&
+					map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]] &&
+					map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]+1]){ return true; }
+		}
+		catch(Exception e) {
+			try {
+				if	   (map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1] &&
+						map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1] &&
+						map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]-1] &&
+						map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]] &&
+						map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]+1]){ return true; }
 			}
-
+			catch(Exception f) {
+				try {
+					if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]-1] &&
+							map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+							map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1] &&
+							map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]-1] &&
+							map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]]){ return true; }
+				}
+				catch(Exception g) {
+					try {
+						if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]-1] &&
+								map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+								map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]+1] &&
+								map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1] &&
+								map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1]){ return true; }
+					}
+					catch(Exception h) {
+						try {
+							if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+									map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]+1] &&
+									map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1] &&
+									map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]] &&
+									map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]+1]){ return true; }
+						}
+						catch(Exception i) {
+							try {
+								if	   (map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1] &&
+										map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]] &&
+										map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]+1]){ return true; }
+							}
+							catch(Exception j) {
+								try {
+									if	   (map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1] &&
+											map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]-1] &&
+											map[cell[0]][cell[1]] <= map[cell[0]+1][cell[1]]){ return true; }
+								}
+								catch(Exception k) {
+									try {
+										if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]-1] &&
+												map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+												map[cell[0]][cell[1]] <= map[cell[0]][cell[1]-1]){ return true; }
+									}
+									catch(Exception l) {
+										try {
+											if	   (map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]] &&
+													map[cell[0]][cell[1]] <= map[cell[0]-1][cell[1]+1] &&
+													map[cell[0]][cell[1]] <= map[cell[0]][cell[1]+1]){ return true; }
+										}
+										catch(Exception m) {
+											return false;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return false;
 		}
 
-
-		return true; //Placeholder
-	}
 	
 	public static int[] findLocalSink(int[][] map, int[] startCell) {
 		return new int[0]; //Placeholder
