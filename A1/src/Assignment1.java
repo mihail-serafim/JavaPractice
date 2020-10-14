@@ -3,9 +3,9 @@ import java.util.Arrays;
 public class Assignment1 {
 
 	public static void main(String [] args){
-		int[][] map = {{200,10,105,45},
+		int[][] map = {{4,6,105,45},
 				       {103,9,12,87},
-					   {102,4,3,9},
+					   {102,20,3,9},
 				  	   {1000,5,300,0}};
 
 		//int[][] map = {
@@ -13,10 +13,10 @@ public class Assignment1 {
 		//				{9,8,7},
 		//				{4,5,6}
 		//			   };
-		int[] cell = {0,1};
+		int[] cell = {1,1};
 
-		System.out.println(findLocalSink(map,cell)[0]);
-		System.out.println(findLocalSink(map,cell)[1]);
+		//System.out.println(findLocalSink(map,cell)[0]);
+		//System.out.println(findLocalSink(map,cell)[1]);
 
 		//int[][] arr = rotateMap(map);
 
@@ -134,45 +134,37 @@ public class Assignment1 {
 	public static int[] findLocalSink(int[][] map, int[] startCell) {
 		int[] cell = startCell;
 		while(!(isSink(map,cell))){
-			int[] mincell = cell;
-			if (cell[0]-1 >= 0 && cell[1]-1 >= 0 && map[cell[0]-1][cell[1]-1] < map[mincell[0]][mincell[1]]){
-				mincell[0] = cell[0]-1;
-				mincell[1] = cell[1]-1;
-			}
-			if (cell[0]-1 >= 0 && map[cell[0]-1][cell[1]] < map[mincell[0]][mincell[1]]){
+			int[] mincell = new int[2];
+			mincell[0] = cell[0];
+			mincell[1] = cell[1];
+
+			if (cell[0] - 1 >= 0 && cell[1] - 1 >= 0 && map[cell[0] - 1][cell[1] - 1] < map[mincell[0]][mincell[1]]) {
+				mincell[0] = cell[0] - 1;
+				mincell[1] = cell[1] - 1;
+			}if (cell[0]-1 >= 0 && map[cell[0]-1][cell[1]] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0]-1;
 				mincell[1] = cell[1];
-			}
-			if (cell[0]-1 >= 0 && cell[1]+1 < map.length && map[cell[0]-1][cell[1]+1] < map[mincell[0]][mincell[1]]){
+			}if (cell[0]-1 >= 0 && cell[1]+1 < map.length && map[cell[0]-1][cell[1]+1] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0]-1;
 				mincell[1] = cell[1]+1;
-			}
-			if (cell[1]-1 >= 0 && map[cell[0]][cell[1]-1] < map[mincell[0]][mincell[1]]){
+			}if (cell[1]-1 >= 0 && map[cell[0]][cell[1]-1] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0];
 				mincell[1] = cell[1]-1;
-			}
-			if (cell[1]+1 < map.length && map[cell[0]][cell[1]+1] < map[mincell[0]][mincell[1]]){
-				mincell[0] = cell[0]-1;
+			}if (cell[1]+1 < map.length && map[cell[0]][cell[1]+1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0];
 				mincell[1] = cell[1]+1;
-			}
-			if (cell[0]+1 < map.length && cell[1]-1 >= 0 && map[cell[0]+1][cell[1]-1] < map[mincell[0]][mincell[1]]){
+			}if (cell[0]+1 < map.length && cell[1]-1 >= 0 && map[cell[0]+1][cell[1]-1] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0]+1;
 				mincell[1] = cell[1]-1;
-			}
-			if (cell[0]+1 < map.length && map[cell[0]+1][cell[1]] < map[mincell[0]][mincell[1]]){
+			}if (cell[0]+1 < map.length && map[cell[0]+1][cell[1]] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0]+1;
 				mincell[1] = cell[1];
-			}
-			if (cell[0]+1 < map.length && cell[1]+1 < map.length && map[cell[0]+1][cell[1]+1] < map[mincell[0]][mincell[1]]){
+			}if (cell[0]+1 < map.length && cell[1]+1 < map.length && map[cell[0]+1][cell[1]+1] < map[mincell[0]][mincell[1]]){
 				mincell[0] = cell[0]+1;
 				mincell[1] = cell[1]+1;
 			}
-			cell = mincell;
-			System.out.println("***");
-			System.out.println(cell[1]);
-			System.out.println(cell[1]);
-			System.out.println("***");
-
+			cell[0] = mincell[0];
+			cell[1] = mincell[1];
 		}
 
 		return cell;
