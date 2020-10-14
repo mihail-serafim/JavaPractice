@@ -1,12 +1,29 @@
+import java.util.Arrays;
+
 public class Assignment1 {
 
 	public static void main(String [] args){
-		int[][] map = {{200,102,105,45},
-				       {103,102,105,87},
-					   {102,102,108,9},
-				  	   {1000,0,300,10}};
+		int[][] map = {{200,10,105,45},
+				       {103,9,12,87},
+					   {102,4,3,9},
+				  	   {1000,5,300,0}};
 
-		int[] cell = {1,1};
+		//int[][] map = {
+		//				{1,2,3},
+		//				{9,8,7},
+		//				{4,5,6}
+		//			   };
+		int[] cell = {0,1};
+
+		System.out.println(findLocalSink(map,cell)[0]);
+		System.out.println(findLocalSink(map,cell)[1]);
+
+		//int[][] arr = rotateMap(map);
+
+		//for (int i = 0; i < arr.length; i++) {
+		//	System.out.println(Arrays.toString(arr[i]));
+		//}
+
 		//int[] out = findPeak(map);
 		//System.out.println(out[0]);
 		//System.out.println(out[1]);
@@ -115,11 +132,60 @@ public class Assignment1 {
 
 	
 	public static int[] findLocalSink(int[][] map, int[] startCell) {
-		return new int[0]; //Placeholder
+		int[] cell = startCell;
+		while(!(isSink(map,cell))){
+			int[] mincell = cell;
+			if (cell[0]-1 >= 0 && cell[1]-1 >= 0 && map[cell[0]-1][cell[1]-1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]-1;
+				mincell[1] = cell[1]-1;
+			}
+			if (cell[0]-1 >= 0 && map[cell[0]-1][cell[1]] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]-1;
+				mincell[1] = cell[1];
+			}
+			if (cell[0]-1 >= 0 && cell[1]+1 < map.length && map[cell[0]-1][cell[1]+1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]-1;
+				mincell[1] = cell[1]+1;
+			}
+			if (cell[1]-1 >= 0 && map[cell[0]][cell[1]-1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0];
+				mincell[1] = cell[1]-1;
+			}
+			if (cell[1]+1 < map.length && map[cell[0]][cell[1]+1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]-1;
+				mincell[1] = cell[1]+1;
+			}
+			if (cell[0]+1 < map.length && cell[1]-1 >= 0 && map[cell[0]+1][cell[1]-1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]+1;
+				mincell[1] = cell[1]-1;
+			}
+			if (cell[0]+1 < map.length && map[cell[0]+1][cell[1]] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]+1;
+				mincell[1] = cell[1];
+			}
+			if (cell[0]+1 < map.length && cell[1]+1 < map.length && map[cell[0]+1][cell[1]+1] < map[mincell[0]][mincell[1]]){
+				mincell[0] = cell[0]+1;
+				mincell[1] = cell[1]+1;
+			}
+			cell = mincell;
+			System.out.println("***");
+			System.out.println(cell[1]);
+			System.out.println(cell[1]);
+			System.out.println("***");
+
+		}
+
+		return cell;
 	}
 	
 	public static void rotateMap(int[][] map) {
-		return; //Placeholder
+		int[][] newmap = new int[map.length][map[0].length];
+
+		for (int i = 0; i < map.length; ++i)
+			for (int j = 0; j < map[0].length; ++j)
+				newmap[i][j] = map[j][map.length - i - 1];
+		map = newmap;
+		return;
 	}
 	
 }
